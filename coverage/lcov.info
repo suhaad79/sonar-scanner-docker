@@ -1,5 +1,5 @@
 TN:
-SF:/usr/src/app/server.js
+SF:/usr/src/server.js
 FN:16,(anonymous_0)
 FN:24,(anonymous_1)
 FNF:2
@@ -34,7 +34,7 @@ BRF:6
 BRH:4
 end_of_record
 TN:
-SF:/usr/src/app/controllers/api/index.js
+SF:/usr/src/controllers/api/index.js
 FNF:0
 FNH:0
 DA:1,1
@@ -48,7 +48,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/usr/src/app/controllers/api/v1/index.js
+SF:/usr/src/controllers/api/v1/index.js
 FNF:0
 FNH:0
 DA:1,1
@@ -61,7 +61,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/usr/src/app/controllers/api/v1/test.js
+SF:/usr/src/controllers/api/v1/test.js
 FN:5,(anonymous_0)
 FNF:1
 FNH:1
@@ -89,7 +89,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:/usr/src/app/middleware/common-middleware.js
+SF:/usr/src/middleware/common-middleware.js
 FNF:0
 FNH:0
 DA:1,1
