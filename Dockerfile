@@ -21,6 +21,7 @@ RUN sonar-scanner \
     -Dsonar.projectName="First Node App" \
     -Dsonar.projectVersion="1.0" \
     -Dsonar.qualitygate="NODE_APP Way" \
+    -Dsonar.scm.provider="git" \
     -Dsonar.sources="/usr/src" \
     -Dsonar.language="javascript" \
     -Dsonar.sourceEncoding="UTF-8" \
