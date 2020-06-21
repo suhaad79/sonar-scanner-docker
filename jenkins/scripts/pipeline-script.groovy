@@ -38,7 +38,6 @@ pipeline {
                           sh "pwd"
                           sh "npm run coverage-lcov"
                           echo "Update lcov info. This is just a temp fix ..."
-                          sh "find coverage/lcov.info -type f -exec sed -i.bak 's,/Users/vikash/.jenkins/workspace/sonar-scanner-docker,/usr/src,g' {} +;"
                         }
                     }
                 }
