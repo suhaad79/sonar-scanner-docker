@@ -1,61 +1,40 @@
+# Description
+This is a sample app to integrate the sonar-scanner with Jenkins CI/CD pipeline. 
+
 ## Pre-requisite(s)
 
-The only prerequisite for running SonarQube is to have Java (Oracle JRE 8 or OpenJDK 8) installed on your machine.
-For more details: `https://docs.sonarqube.org/display/SONAR/Requirements`
+1. Docker should be be installed, up, and running.
+2. Jenkins Server should be set up and running.
+3. Sonar Scanner plugin should be installed and added in the Jenkins.
 
+## Steps to bring up the sonarqube server using docker image
+Step 1: Define services in a Compose file (path: <project_dir>/sonarqube-server)<br>
+Step 2: Build and run your app with Compose:<br>
+```
+cd <project_dir>/sonarqube-server
+docker-compose up -d
+```
 
-## Download below software(s)
-1. LTS version of Sonarqube. 
-   For ref: `https://www.sonarqube.org/downloads/`
-2. SonarQube-scanner based on your platform. 
-   For ref: `https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner`
+## Userful commands:
+1. Check if the container is up and running. <br>
+`Note:` Bringing up first time, if YES, it might take sometime to start the sonarqube server.
+2. Command to check the running container:
+```
+docker ps
+```
 
-## Steps to setup the sonarqube configuration properites
-1. Once `SonarQube-scanner` is downloaded, add below two properties in `sonar-scanner.properties`:
-    ```
-    #----- Default SonarQube server
-    sonar.host.url=http://localhost:9000
-    
-    #----- Default source code encoding
-    sonar.sourceEncoding=UTF-8
-    ```
-    `sonar-scanner.properties` can get under location <path_of_sonarqube_scanner/<choose_platform/conf>
-    `For e.g. ~/Documents/software/sonar-scanner-3.2.0.1227-macosx/conf`
+## Problem(s) faced during detup
+1. Pull request sonarqube scan analysis was not working.<br>
+`Resolution`: Since the used image of sonarqube server is a *communinty version* and the latest lts version does not come up with scan-github plugin. So, in order to make it work I have to explicitly add the `sonarqube-community-branch-plugin`. The same has been added under plugin folder.
+2. The sonar-scanner was not working as expected.<br>
+`Resolution`: The reason was sonar-scanner path was not set properly. Since sonar-scanner was added in the Jenkins so we need to get the absolute path of sonar-scanner within Jenkin's server or we must set the env variable.
+3. Pull request -> Checks does not generate the sonar scanner analysis in the Github
+`Reason`: No resolution found! During the research came to know that the free version of sonar-github plugin has bee removed and now, it comes with Developer edition. The `Developer Edition` gives us the 14 days trial. Though I have not tried setting this up.
 
-2. Create a `sonar-project.properties` file in root location of your nodejs app.
-3. Add below configuration properties in above created file:
-    ```
-    # required metdata
-    sonar.projectKey=<preferrable_node_app_name>
-    sonar.projectVersion=<version>
-    sonar.sourceEncoding=<source code encoding>
+## Steps to contribute
+1. Fork the repository.<br>
+2. Make the necessary changes for the identified/missing feature.<br>
+3. Raise the PR<br>
 
-    # path to srouce directories
-    sonar.sources=<your_node_app_folder_name>
-
-    # excludes
-    sonar.exclusions=<files or folder which you want to exclude>
-
-    # coverage reporting
-    sonar.javascript.lcov.reportPaths=<code coverage location>
-    ```
-    `Note:` These are required for sonar-scanner to analyaze and generate the report accordingly.
-
-## Start the sonarqube server
-    Go to SonarQube's downloaded location, and run below command:
-    ```
-    ~<path>/sonarqube-6.7.5/bin/macosx-universal-64 $ ./snoar.sh --help
-    ```
-    `For e.g.: ~/Documents/software/sonarqube-6.7.5/bin/macosx-universal-64 $ ./sonar.sh --start`
-
-## Run the sonar-scanner
-    Got to root directory of your project folder where you have created the `sonar-projects.properties` file and run the below command:
-    ```
-    ~<root path of your project> $ sonar-scanner
-    ```
-    `For e.g. ~/Documents/learning/sonarqube $ sonar-scanner`
-
-## Access the generated report to analyaze further
-1. Get the host url which you have set in the configuration and try accessing it.
-2. Default username and password is: admin/admin
-    `For e.g. http://localhost:9000/dashboard?id=<project_key>`
+## Contact:
+For more details please drop a email to: servikash@gmail.com. I will be glad if I can help in someway.
