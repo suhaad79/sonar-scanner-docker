@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('Pre Build') {
             steps {
-                dir("/Users/vikash/.jenkins/workspace/sonar-scanner-docker") {
+                dir("/Users/vikash/.jenkins/workspace/Sonar Scanner/sonar-scanner-docker") {
                     sh 'node --version'
                     sh "rm -rf *"
                     git branch: "${branch_name}", credentialsId: "gitaccess", url: "${ssh_url}"
@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Build') {
             steps {
-                dir("/Users/vikash/.jenkins/workspace/sonar-scanner-docker") {
+                dir("/Users/vikash/.jenkins/workspace/Sonar Scanner/sonar-scanner-docker") {
                     script {
                         if ("${branch_name}" == "master") {
                           echo "I am working for branch: ${branch_name}"
@@ -30,7 +30,7 @@ pipeline {
         }
         stage('Coverage') {
             steps {
-                dir("/Users/vikash/.jenkins/workspace/sonar-scanner-docker") {
+                dir("/Users/vikash/.jenkins/workspace/Sonar Scanner/sonar-scanner-docker") {
                     script {
                         if ("${branch_name}" == "master") {
                           echo "I am working for branch: ${branch_name}"
@@ -46,14 +46,13 @@ pipeline {
         }
         stage('Sonar Scanner') {
             steps {
-                dir("/Users/vikash/.jenkins/workspace/sonar-scanner-docker") {
+                dir("/Users/vikash/.jenkins/workspace/Sonar Scanner/sonar-scanner-docker") {
                     script {
                         if ("${branch_name}" == "master") {
                           echo "I am working for branch: ${branch_name}"
-                          echo "Sonar scanning started ..."
                           sh "pwd"
-                          sh "docker build --network=host --no-cache ."
-                          sh "sonar-scanner"
+                          echo "Sonar scanning started ..."
+                          sh "/Users/vikash/.jenkins/tools/hudson.plugins.sonar.SonarRunnerInstallation/sonar-scanner/bin/sonar-scanner"
                         }
                     }
                 }
@@ -61,7 +60,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                dir("/Users/vikash/.jenkins/workspace/sonar-scanner-docker") {
+                dir("/Users/vikash/.jenkins/workspace/Sonar Scanner/sonar-scanner-docker") {
                     script {
                         if("${branch_name}" == "master"){
                             echo "Deployment command need to be added here ..."
