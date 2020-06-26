@@ -1,5 +1,5 @@
 # Description
-This is a sample app to integrate the sonar-scanner with Jenkins CI/CD pipeline. 
+This is a sample app to integrate the sonar-scanner with Jenkins CI/CD pipeline.
 
 ## Pre-requisite(s)
 
