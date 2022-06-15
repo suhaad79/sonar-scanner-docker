@@ -23,7 +23,7 @@ docker-compose up -d
 docker ps
 ```
 
-## Problem(s) faced during detup
+## Problem(s) faced during setup
 1. Pull request sonarqube scan analysis was not working.<br>
 `Resolution`: Since the used image of sonarqube server is a *communinty version* and the latest lts version does not come up with scan-github plugin. So, in order to make it work I have to explicitly add the `sonarqube-community-branch-plugin`. The same has been added under plugin folder.
 2. The sonar-scanner was not working as expected.<br>
