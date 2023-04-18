@@ -1,10 +1,10 @@
 name: Build
 on:
- push:
-   branches:
-     - master
- pull_request:
-   types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - master
+  pull_request:
+    types: [opened, synchronize, reopened]
 jobs:
   sonarqube:
     name: sonarqube
@@ -14,9 +14,11 @@ jobs:
         with:
           fetch-depth: 0 
       - name: Install dependencies
-        run: yarn
+        run: yarn install
+      - name: Add Jest as dev dependency
+        run: yarn add --dev jest
       - name: Test and coverage
-        run: yarn jest --coverage
+        run: yarn run jest --coverage
       - name: SonarQube Scan
         uses: SonarSource/sonarqube-scan-action@master
         env:
